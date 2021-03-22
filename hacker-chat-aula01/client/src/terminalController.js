@@ -3,23 +3,23 @@ import { constants } from "./constants.js"
 
 
 export default class TerminalController {
-    #usersCollors = new Map()
+    #usersColors = new Map()
 
     constructor() { }
 
 
-    #pickCollor() {
+    #pickColor() {
         return `#${((1 << 24) * Math.random() | 0).toString(16)}-fg`
     }
 
-    #getUserCollor(userName) {
-        if (this.#usersCollors.has(userName))
-            return this.#usersCollors.get(userName)
+    #getUserColor(userName) {
+        if (this.#usersColors.has(userName))
+            return this.#usersColors.get(userName)
 
-        const collor = this.#pickCollor()
-        this.#usersCollors.set(userName, collor)
+        const color = this.#pickColor()
+        this.#usersColors.set(userName, color)
 
-        return collor
+        return color
     }
 
     #onInputReceived(eventEmitter) {
@@ -33,9 +33,9 @@ export default class TerminalController {
     #onMessageReceived({ screen, chat }) {
         return msg => {
             const { userName, message } = msg
-            const collor = this.#getUserCollor(userName)
+            const color = this.#getUserColor(userName)
 
-            chat.addItem(`{${collor}}{bold}${userName}{/}: ${message}`)
+            chat.addItem(`{${color}}{bold}${userName}{/}: ${message}`)
 
             screen.render()
         }
@@ -48,8 +48,8 @@ export default class TerminalController {
             // erickwendel join
 
             const [userName] = msg.split(/\s/)
-            const collor = this.#getUserCollor(userName)
-            activityLog.addItem(`{${collor}}{bold}${msg.toString()}{/}`)
+            const color = this.#getUserColor(userName)
+            activityLog.addItem(`{${color}}{bold}${msg.toString()}{/}`)
 
             screen.render()
         }
@@ -65,8 +65,8 @@ export default class TerminalController {
             status.addItem(content)
 
             users.forEach(userName => {
-                const collor = this.#getUserCollor(userName)
-                status.addItem(`{${collor}}{bold}${userName}{/}`)
+                const color = this.#getUserColor(userName)
+                status.addItem(`{${color}}{bold}${userName}{/}`)
             })
 
             screen.render()
