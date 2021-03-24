@@ -8,7 +8,7 @@ node index.js \
 
 import Events from 'events'
 import CliConfig from './src/cliConfig.js';
-import SocketClient from './src/socker.js';
+import SocketClient from './src/socket.js';
 import TerminalController from "./src/terminalController.js";
 
 
