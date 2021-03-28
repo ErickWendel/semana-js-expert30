@@ -9,7 +9,7 @@ export default class TerminalController {
 
 
     #pickCollor() {
-        return `#${((1 << 24) * Math.random() | 0).toString(16)}-fg`
+        return `#${(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}-fg`
     }
 
     #getUserCollor(userName) {
